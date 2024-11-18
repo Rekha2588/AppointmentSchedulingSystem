@@ -27,9 +27,13 @@
               }
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -50,13 +54,19 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",          
           "configurations": {
             "production": {
               "buildTarget": "AppointmentBooking:build:production"
@@ -65,7 +75,7 @@
               "buildTarget": "AppointmentBooking:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development"          
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

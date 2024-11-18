@@ -1,0 +1,31 @@
+<form class="row g-3">
+    <label for="edit" class="col-12 col-form-label">Edit Appointment</label>
+    <hr/>
+    <div class="col-md-6">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="firstName" value="{{appointment.patient.firstName}}" name="firstName" readonly>
+    </div>
+    <div class="col-md-6">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lastName" value="{{appointment.patient.lastName}}" name="lastName" readonly>
+    </div>
+    <div class="col-md-6">
+        <label for="gender" class="form-label">Gender</label>
+        <input type="text" class="form-control" id="gender" value="{{appointment.patient.gender}}" name="gender" readonly>
+    </div>
+    <div class="col-md-6">
+        <label for="dateOfBirth" class="form-label">Date Of Birth</label>
+        <input type="text" class="form-control" id="dateOfBirth" value="{{appointment.patient.dateOfBirth | date : 'YYYY-MM-dd'}}" name="dateOfBirth" readonly>
+    </div>
+    <div class="col-md-6">
+        <label for="startTime" class="form-label">Appt Start Time</label>
+        <input type="text" class="form-control" id="startTime" [(ngModel)]="appointment.startTime" name="startTime">
+    </div>
+    <div class="col-md-6">
+        <label for="endTime" class="form-label">Appt End Time</label>
+        <input type="text" class="form-control" id="endTime" [(ngModel)]="appointment.endTime" name="endTime" readonly>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" (click)="rescheduleAppointment(appointment)">Save</button>
+    </div>
+</form>

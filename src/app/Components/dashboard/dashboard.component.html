@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="my-3">
+        <form class="row">
+            <label for="date" class="col-1 col-form-label">Appointments</label>
+            <div class="col-2">
+              <div class="input-group date" id="datepicker">
+                <input type="text" class="form-control" id="date" placeholder="yyyy-mm-dd" [(ngModel)]="selectedDate" name="date" (change)="reloadDashboard()" />
+                <!-- <span class="input-group-append">
+                  <span class="input-group-text bg-light d-block">
+                    <i class="bi bi-calendar-event-fill"></i>
+                  </span>
+                </span> -->
+              </div>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-info" (click)="createAppointment()">Create New appointment</button>
+            </div>
+        </form>
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead class="table-info">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Date Of Birth</th>
+                <th scope="col">Appt Start Time</th>
+                <th scope="col">Appt End Time</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let appointment of appointments; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</td>
+                <td>{{appointment.patient.gender}}</td>
+                <td>{{appointment.patient.dateOfBirth | date : "YYYY-MM-dd"}}</td>
+                <td>{{appointment.startTime | date : "YYYY-MM-dd HH:mm:ss"}}</td>
+                <td>{{appointment.endTime | date : "YYYY-MM-dd HH:mm:ss"}}</td>
+                <td><i class="bi bi-pencil-square" (click)="editAppointment(appointment)"></i></td>
+                <td><i class="bi bi-trash-fill" (click)="deleteAppointment(appointment.appointmentId)"></i></td>
+            </tr>            
+        </tbody>
+    </table>
+</div>

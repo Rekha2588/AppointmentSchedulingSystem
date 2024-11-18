@@ -1,0 +1,37 @@
+<form class="row g-3">
+    <label for="edit" class="col-12 col-form-label">Create Appointment</label>
+    <hr/>
+    <div class="col-md-6">
+        <label for="firstName" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="appointment.patient.firstName" name="firstName">
+    </div>
+    <div class="col-md-6">
+        <label for="lastName" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="appointment.patient.lastName" name="lastName" required
+        #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched">
+        <div class="invalid-feedback" [class.d-none]="lastName.valid || lastName.untouched">
+            Last Name is required
+        </div>
+    </div>    
+    <div class="col-md-6">
+        <label for="dateOfBirth" class="form-label">Date Of Birth</label>
+        <input type="text" class="form-control" id="dateOfBirth" pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-dd" [(ngModel)]="appointment.patient.dateOfBirth" name="dateOfBirth" required
+        #dateOfBirth="ngModel" [class.is-invalid]="dateOfBirth.invalid && dateOfBirth.touched">
+        <div *ngIf="dateOfBirth.errors && (dateOfBirth.invalid || dateOfBirth.touched)" class="invalid-feedback">
+            <span class="text-danger" *ngIf="dateOfBirth.errors?.['required']">Date Of Birth is required</span>
+            <span class="text-danger" *ngIf="dateOfBirth.errors?.['pattern']">Date Of Birth is invalid</span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="startTime" class="form-label">Appt Start Time</label>
+        <input type="text" class="form-control" id="startTime" pattern="\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}" placeholder="YYYY-MM-dd HH:mm:ss" [(ngModel)]="appointment.startTime" name="startTime" required
+        #startTime="ngModel" [class.is-invalid]="startTime.invalid && startTime.touched">
+        <div *ngIf="startTime.errors && (startTime.invalid || startTime.touched)" class="invalid-feedback">
+            <span class="text-danger" *ngIf="startTime.errors?.['required']">Appointment Start Time is required</span>
+            <span class="text-danger" *ngIf="startTime.errors?.['pattern']">Appointment Start Time is invalid</span>
+        </div>
+    </div>    
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" (click)="createAppointment()">Submit</button>
+    </div>
+</form>
